@@ -48,7 +48,6 @@ void setup() {
 }
 
 void loop() {
-  // El bucle principal está vacío, no se requiere ninguna acción continua para este ejemplo
 }
 ```
 <br>
