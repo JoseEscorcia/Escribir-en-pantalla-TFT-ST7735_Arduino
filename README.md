@@ -8,7 +8,7 @@ Indicaciones de cómo conectar y escribir la pantalla TFT ST7735.
 
 <br>
 
-### Codigo:
+### Código:
 
 ```c++
 // Importar las librerías necesarias para manejar la pantalla TFT y la comunicación SPI
