@@ -60,3 +60,40 @@ void loop() {
 <div align="center">
     <img src="resultado_TFT.jpg" width="300px"/>  
 </div>
+
+<br>
+
+## ESP8266:
+<div align="center">
+    <img src="conexion_ESP8266_tft-st7735.png" width="800px"/>  
+</div>
+
+<br>
+
+### Código:
+```c++
+#include <TFT_eSPI.h>  // Incluir la librería TFT_eSPI
+
+TFT_eSPI tft = TFT_eSPI();  // Crear una instancia del objeto TFT
+
+void setup() {
+  tft.init();  // Inicializar la pantalla
+  tft.setRotation(3);  // Establecer la rotación de la pantalla
+  tft.fillScreen(TFT_BLACK);  // Llenar la pantalla con color negro
+
+  tft.setTextColor(TFT_WHITE, TFT_BLACK);  // Establecer el color del texto
+  tft.setTextSize(1);  // Establecer el tamaño del texto
+  tft.setCursor(0,0);  // Establecer la posición del cursor
+  tft.println("Hola, TFT_eSPI!");  // Mostrar el texto en la pantalla
+}
+
+void loop() {
+  // No hay necesidad de código en el bucle principal para este ejemplo
+}
+```
+<br>
+
+### Resultado:
+<div align="center">
+    <img src="resultado_TFT_esp8266.jpg" width="300px"/>  
+</div>
