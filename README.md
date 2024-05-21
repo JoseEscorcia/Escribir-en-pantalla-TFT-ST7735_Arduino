@@ -32,6 +32,10 @@ void setup() {
   
   // Rotar la pantalla 270 grados (3 es el valor correspondiente para esta rotación)
   pantalla.setRotation(3);
+  //0°: pantalla.setRotation(0);
+  //90°: pantalla.setRotation(1);
+  //180°: pantalla.setRotation(2);
+  //270°: pantalla.setRotation(3);
   
   // Limpiar la pantalla con un fondo negro
   pantalla.background(0, 0, 0);
