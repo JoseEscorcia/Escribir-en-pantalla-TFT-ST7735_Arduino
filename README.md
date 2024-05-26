@@ -8,7 +8,20 @@ Indicaciones de cómo conectar y escribir en la pantalla TFT ST7735.
 
 <br>
 
-### Código:
+| Arduino UNO | Pantalla TFT |
+|-----|-----------|
+| 5V | VCC|
+| GND | GND |
+| D10 | CS |
+| D8 | RESET |
+| D9 | AO/DC |
+| D11 | SDA |
+| D13 | SCK |
+| 3.3V | LED |
+
+<br>
+
+### _Código_:
 
 ```c++
 // Importar las librerías necesarias para manejar la pantalla TFT y la comunicación SPI
@@ -56,28 +69,43 @@ void loop() {
 ```
 <br>
 
-### Resultado:
+### _Resultado_:
 <div align="center">
     <img src="resultado_TFT.jpg" width="300px"/>  
 </div>
 
 <br>
 
-## ESP8266:
+---------------
+
+## ESP8266 (eSPI):
 <div align="center">
     <img src="conexion_ESP8266_tft-st7735.png" width="800px"/>  
 </div>
 
 <br>
 
-### Librería:
+| ESP8266 | Pantalla TFT |
+|-----|-----------|
+| 3.3V | VCC|
+| GND | GND |
+| D8 (GPIO 15) | CS |
+| D4 (GPIO 2) | RESET |
+| D3 (GPIO 0) | AO/DC |
+| D7 (GPIO 13) | SDA |
+| D5 (GPIO 14) | SCK |
+| 3.3V | LED |
+
+<br>
+
+### _Librería_:
 <div align="center">
     <img src="libreria_espi.jpg" width="800px"/>  
 </div>
 
 Descarga la librería: [Librería](TFT_eSPI-master.zip)
 
-> [!TIP]
+> [!NOTE]
 > Enlace al repositorio oficial: https://github.com/Bodmer/TFT_eSPI/tree/master
 
 <br>
@@ -491,7 +519,7 @@ El codigo modificado del archivo "User_Setup.h" es:
 
 <br>
 
-### Código:
+### _Código_:
 ```c++
 #include <TFT_eSPI.h>  // Incluir la librería TFT_eSPI
 
@@ -514,7 +542,112 @@ void loop() {
 ```
 <br>
 
-### Resultado:
+### _Resultado_:
 <div align="center">
     <img src="resultado_TFT_esp8266.jpg" width="300px"/>  
 </div>
+
+---------------
+
+<br>
+
+## ESP8266 (Adafruit_GFX + Adafruit_ST7735):
+<div align="center">
+    <img src="conexion_tft_esp8266_adafruit.jpg" width="800px"/>  
+</div>
+
+<br>
+
+| ESP8266 | Pantalla TFT |
+|-----|-----------|
+| 3.3V | VCC|
+| GND | GND |
+| D8 (GPIO 15)| CS |
+| RESET | RESET |
+| D4 (GPIO 2) | AO/DC |
+| D7 (GPIO 13) | SDA |
+| D5 (GPIO 14) | SCK |
+| 3.3V | LED |
+
+<br>
+
+### _Librerías_:
+
+Algunas versiones de estas librerias puede que creen conflictos y no funcionen como deberían. Para este caso se usaron las versiones Adafruit-GFX-Library-1.3.4 y Adafruit-ST7735-Library-1.2.6:
+
+Adafruit-GFX:
+<div align="center">
+    <img src="libreria_gfx.jpg"/>  
+</div>
+
+Descarga la librería Adafruit-GFX: [Librería](Adafruit-GFX-Library-1.3.4.zip)
+
+> [!NOTE]
+> Enlace al repositorio oficial: https://github.com/adafruit/Adafruit-GFX-Library/releases?page=7
+
+
+<br>
+
+
+Adafruit-ST7735:
+<div align="center">
+    <img src="libreria_ST7735.jpg"/>  
+</div>
+
+Descarga la librería Adafruit-GFX: [Librería](Adafruit-ST7735-Library-1.2.6.zip)
+
+> [!NOTE]
+> Enlace al repositorio oficial: https://github.com/adafruit/Adafruit-ST7735-Library/releases?page=6
+
+</details>
+
+<br>
+
+### _Código:_
+```c++
+#include <Arduino.h>  // Incluye la librería de Arduino
+#include <Adafruit_GFX.h>  // Incluye la librería para gráficos de Adafruit
+#include <Adafruit_ST7735.h>  // Incluye la librería para el controlador ST7735
+
+#define TFT_DC 2  // Define el pin para el pin de comando de la pantalla
+#define TFT_CS 12  // Define el pin para el chip select de la pantalla
+#define TFT_RESET -1  // Define el pin de reinicio de la pantalla (no utilizado en este caso)
+Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RESET);  // Crea un objeto Adafruit_ST7735 llamado tft con los pines definidos
+
+void setup() {
+  Serial.begin(115200);  // Inicializa la comunicación serial
+
+  tft.initR(INITR_BLACKTAB);  // Inicializa la pantalla con un cierto tipo de pestaña
+  tft.setRotation(3); // Rotar la pantalla
+  tft.fillScreen(ST7735_BLACK); // Limpia la pantalla colocándola en negro
+  tft.setCursor(0, 0);  // Establece la posición del cursor en la pantalla
+  tft.setTextColor(ST7735_GREEN);  // Establece el color del texto
+  tft.setTextSize(2);  // Establece el tamaño del texto
+  tft.println("Counter:");  // Imprime el texto "Counter:" en la pantalla
+}
+
+void displayCounter(int count) {
+  // Imprime el número anterior en negro para "borrarlo"
+  tft.setCursor(0, 20);  // Establece la posición del cursor en la pantalla
+  tft.setTextColor(ST7735_BLACK, ST7735_BLACK);  // Establece el color del texto y del fondo
+  tft.setTextSize(4);  // Establece el tamaño del texto
+  tft.println(count - 1);  // Imprime el valor del contador anterior en la pantalla
+
+  // Imprime el número actual en verde
+  tft.setCursor(0, 20);  // Establece la posición del cursor en la pantalla
+  tft.setTextColor(ST7735_GREEN);  // Establece el color del texto
+  tft.setTextSize(4);  // Establece el tamaño del texto
+  tft.println(count);  // Imprime el valor actual del contador en la pantalla
+}
+
+void loop() {
+  static int counter = 0;  // Declara una variable estática para el contador
+  displayCounter(counter);  // Llama a la función para mostrar el contador en la pantalla
+  counter++;  // Incrementa el contador
+  delay(1000); // Espera 1 segundo antes de actualizar el contador
+}
+```
+<br>
+
+### _Resultado_:
+![8rolc4](https://github.com/JoseEscorcia/Escribir-en-pantalla-TFT-ST7735_Arduino/assets/99065215/d72a7607-b1b7-479e-9519-639edcf84a68)
