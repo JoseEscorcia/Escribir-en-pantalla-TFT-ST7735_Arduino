@@ -96,6 +96,10 @@ void loop() {
 | D5 (GPIO 14) | SCK |
 | 3.3V | LED |
 
+<div align="center">
+    <img src="configuracionESP8266_lolin.jpg" width="400px"/>  
+</div>
+
 <br>
 
 ### _Librería_:
@@ -568,6 +572,10 @@ void loop() {
 | D7 (GPIO 13) | SDA |
 | D5 (GPIO 14) | SCK |
 | 3.3V | LED |
+
+<div align="center">
+    <img src="configuracionESP8266_lolin.jpg" width="400px"/>  
+</div>
 
 <br>
 
