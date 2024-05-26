@@ -1,5 +1,5 @@
 # Escribir en pantalla TFT-ST7735
-Indicaciones de cómo conectar y escribir en la pantalla TFT ST7735.
+Indicaciones de cómo conectar y escribir en la pantalla TFT ST7735. En los siguientes ejemplos se uso el IDE Arduino 1.8.18.
 
 ## Arduino UNO:
 <div align="center">
