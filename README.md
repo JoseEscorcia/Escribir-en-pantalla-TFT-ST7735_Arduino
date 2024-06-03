@@ -602,7 +602,7 @@ Adafruit-ST7735:
     <img src="libreria_ST7735.jpg"/>  
 </div>
 
-Descarga la librería Adafruit-GFX: [Librería](Adafruit-ST7735-Library-1.2.6.zip)
+Descarga la librería Adafruit-ST7735: [Librería](Adafruit-ST7735-Library-1.2.6.zip)
 
 > [!NOTE]
 > Enlace al repositorio oficial: https://github.com/adafruit/Adafruit-ST7735-Library/releases?page=6
